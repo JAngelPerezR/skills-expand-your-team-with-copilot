@@ -569,6 +569,16 @@ document.addEventListener("DOMContentLoaded", () => {
         `
         }
       </div>
+      <div class="share-section">
+        <button class="share-toggle-button" aria-label="Share this activity">
+          <span class="share-icon">🔗</span> Share
+        </button>
+        <div class="share-buttons hidden">
+          <a class="share-btn share-twitter" href="#" aria-label="Share on X (Twitter)" target="_blank" rel="noopener noreferrer">𝕏</a>
+          <a class="share-btn share-facebook" href="#" aria-label="Share on Facebook" target="_blank" rel="noopener noreferrer">f</a>
+          <button class="share-btn share-copy" aria-label="Copy link">📋</button>
+        </div>
+      </div>
     `;
 
     // Add click handlers for delete buttons
@@ -586,6 +596,45 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
     }
+
+    // Add share button functionality
+    const shareToggle = activityCard.querySelector(".share-toggle-button");
+    const shareButtons = activityCard.querySelector(".share-buttons");
+    const shareUrl = `${window.location.origin}${window.location.pathname}?activity=${encodeURIComponent(name)}`;
+    const shareText = `Check out "${name}" at Mergington High School! ${details.description}`;
+
+    shareToggle.addEventListener("click", () => {
+      if (navigator.share) {
+        navigator.share({ title: name, text: shareText, url: shareUrl }).catch(() => {});
+      } else {
+        shareButtons.classList.toggle("hidden");
+      }
+    });
+
+    const twitterLink = activityCard.querySelector(".share-twitter");
+    twitterLink.href = `https://x.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
+
+    const facebookLink = activityCard.querySelector(".share-facebook");
+    facebookLink.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+
+    const copyButton = activityCard.querySelector(".share-copy");
+    copyButton.addEventListener("click", () => {
+      navigator.clipboard.writeText(shareUrl).then(() => {
+        copyButton.textContent = "✅";
+        copyButton.setAttribute("aria-label", "Link copied!");
+        setTimeout(() => {
+          copyButton.textContent = "📋";
+          copyButton.setAttribute("aria-label", "Copy link");
+        }, 2000);
+      }).catch(() => {
+        copyButton.textContent = "❌";
+        copyButton.setAttribute("aria-label", "Copy failed");
+        setTimeout(() => {
+          copyButton.textContent = "📋";
+          copyButton.setAttribute("aria-label", "Copy link");
+        }, 2000);
+      });
+    });
 
     activitiesList.appendChild(activityCard);
   }

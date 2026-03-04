@@ -476,6 +476,84 @@ footer {
   font-size: 0.8rem;
 }
 
+/* Social Share Styles */
+.share-section {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.share-toggle-button {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 3px 10px;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+}
+
+.share-toggle-button:hover {
+  background-color: var(--background);
+  border-color: var(--primary-light);
+  color: var(--primary);
+}
+
+.share-icon {
+  font-size: 0.85rem;
+}
+
+.share-buttons {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 0.85rem;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+  transition: opacity 0.2s ease;
+}
+
+.share-btn:hover {
+  opacity: 0.8;
+}
+
+.share-twitter {
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 0.8rem;
+}
+
+.share-facebook {
+  background-color: #1877f2;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.share-copy {
+  background-color: var(--border);
+  color: var(--text-primary);
+  font-size: 0.75rem;
+}
+
 /* Search and Filter Components - Updated for Sidebar */
 .search-box {
   display: flex;
